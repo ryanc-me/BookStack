@@ -41,7 +41,7 @@ class LoginController extends Controller
     public function __construct(SocialAuthService $socialAuthService)
     {
         $this->middleware('guest', ['only' => ['getLogin', 'login']]);
-        $this->middleware('guard:standard,ldap', ['only' => ['login', 'logout']]);
+        $this->middleware('guard:standard,ldap,auth-proxy', ['only' => ['login', 'logout']]);
 
         $this->socialAuthService = $socialAuthService;
         $this->redirectPath = url('/');
@@ -196,4 +196,11 @@ class LoginController extends Controller
         return redirect('/login');
     }
 
+    protected function loggedOut(Request $request)
+    {
+      $authProxyGuard = $this->guard('auth-proxy');
+      if ($authProxyGuard->check()) {
+        return $authProxyGuard->logoutRedirect();
+      }
+    }
 }

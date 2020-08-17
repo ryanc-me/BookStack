@@ -134,4 +134,12 @@ return [
         'tls_insecure' => env('LDAP_TLS_INSECURE', false),
     ],
 
+    'auth_proxy' => [
+        'header_name' => env('AUTH_PROXY_HEADER_NAME', 'X-Webauth-User'),
+        'header_property' => env('AUTH_PROXY_HEADER_PROPERTY', 'email'),
+        'whitelist' => env('AUTH_PROXY_WHITELIST', null),
+        'allow_guest' => env('AUTH_PROXY_ALLOW_GUEST', false),
+        'logout_url' => env('AUTH_PROXY_LOGOUT_URL', null),
+    ],
+
 ];

@@ -26,7 +26,8 @@ return [
     // All authentication drivers have a user provider. This defines how the
     // users are actually retrieved out of your database or other storage
     // mechanisms used by this application to persist your user's data.
-    // Supported drivers: "session", "api-token", "ldap-session"
+    // Supported drivers: "session", "api-token", "ldap-session", "saml2-session",
+    // "auth-proxy"
     'guards' => [
         'standard' => [
             'driver' => 'session',
@@ -43,6 +44,9 @@ return [
         'api' => [
             'driver' => 'api-token',
         ],
+        'auth-proxy' => [
+            'driver' => 'auth-proxy',
+        ]
     ],
 
     // User Providers

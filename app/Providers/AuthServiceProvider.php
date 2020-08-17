@@ -7,6 +7,7 @@ use BookStack\Api\ApiTokenGuard;
 use BookStack\Auth\Access\ExternalBaseUserProvider;
 use BookStack\Auth\Access\Guards\LdapSessionGuard;
 use BookStack\Auth\Access\Guards\Saml2SessionGuard;
+use BookStack\Auth\Access\Guards\AuthProxyGuard;
 use BookStack\Auth\Access\LdapService;
 use BookStack\Auth\Access\RegistrationService;
 use BookStack\Auth\UserRepo;
@@ -23,6 +24,10 @@ class AuthServiceProvider extends ServiceProvider
     {
         Auth::extend('api-token', function ($app, $name, array $config) {
             return new ApiTokenGuard($app['request']);
+        });
+
+        Auth::extend('auth-proxy', function ($app, $name, array $config) {
+            return new AuthProxyGuard($app['request']);
         });
 
         Auth::extend('ldap-session', function ($app, $name, array $config) {
